@@ -1,21 +1,24 @@
 <?php
 
-// DATABASE CONNECTION SETTINGS
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "lakbay_manila";
+$host = getenv("DB_HOST");
+$username = getenv("DB_USER");
+$password = getenv("DB_PASSWORD");
+$database = getenv("DB_NAME");
+$port = getenv("DB_PORT") ?: 3306;
 
-// CONNECT TO MYSQL
-$conn = new mysqli($host, $username, $password, $database);
+$conn = new mysqli(
+    $host,
+    $username,
+    $password,
+    $database,
+    (int)$port
+);
 
-// CHECK CONNECTION
 if ($conn->connect_error) {
     http_response_code(500);
     die("Database connection failed.");
 }
 
-// SET CHARACTER ENCODING
 $conn->set_charset("utf8mb4");
 
 ?>
