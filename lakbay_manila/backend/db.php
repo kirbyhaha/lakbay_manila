@@ -1,4 +1,3 @@
-
 <?php
 
 $host = getenv("DB_HOST");
@@ -7,8 +6,8 @@ $password = getenv("DB_PASSWORD");
 $database = getenv("DB_NAME");
 $port = (int)(getenv("DB_PORT") ?: 4000);
 
-// Initialize MySQLi
 mysqli_report(MYSQLI_REPORT_OFF);
+
 $conn = mysqli_init();
 
 if (!$conn) {
@@ -16,13 +15,9 @@ if (!$conn) {
     die("Database initialization failed.");
 }
 
-// Connection timeout
 $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, 10);
-
-// Enable certificate verification
 $conn->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
 
-// Use the trusted CA certificates in the Render container
 $conn->ssl_set(
     null,
     null,
@@ -31,7 +26,6 @@ $conn->ssl_set(
     null
 );
 
-// Connect using TLS
 $connected = $conn->real_connect(
     $host,
     $username,
@@ -47,7 +41,4 @@ if (!$connected) {
     die("Database connection failed.");
 }
 
-// Set character encoding
 $conn->set_charset("utf8mb4");
-
-?>
