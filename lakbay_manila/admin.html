@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakbay Manila | Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="admin.js" defer></script>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <a href="home.html" class="brand">
+            <span class="brand-logo">LM</span>
+            <span>Lakbay Manila</span>
+        </a>
+
+        <p class="sidebar-label">MAIN MENU</p>
+
+        <nav class="sidebar-nav">
+            <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="#places" class="nav-link" data-section="places">
+                <span>⌖</span> Manage Places
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="home.html" class="nav-link">
+                <span>↗</span> View Website
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div>
+                <h1>Admin Dashboard</h1>
+                <p>Manage your Lakbay Manila website content.</p>
+            </div>
+
+            <div class="admin-profile">
+                <div class="profile-avatar">A</div>
+                <div>
+                    <strong>Administrator</strong>
+                    <small>Website Manager</small>
+                </div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD SECTION -->
+        <section id="dashboard" class="page-section">
+
+            <div class="welcome-section">
+                <div>
+                    <h2>Welcome, Administrator!</h2>
+                    <p>Here's an overview of your tourist destinations.</p>
+                </div>
+
+                <button class="primary-btn" id="addPlaceBtn">
+                    + Add New Place
+                </button>
+            </div>
+
+            <!-- STATISTICS -->
+            <div class="stats-grid">
+
+                <article class="stat-card">
+                    <div class="stat-icon">⌖</div>
+                    <div>
+                        <p>Total Places</p>
+                        <h2 id="totalPlaces">0</h2>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon">🏰</div>
+                    <div>
+                        <p>Historical</p>
+                        <h2 id="historicalCount">0</h2>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon">🏛️</div>
+                    <div>
+                        <p>Museums</p>
+                        <h2 id="museumCount">0</h2>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon">⛪</div>
+                    <div>
+                        <p>Churches</p>
+                        <h2 id="churchCount">0</h2>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon">🌳</div>
+                    <div>
+                        <p>Parks</p>
+                        <h2 id="parkCount">0</h2>
+                    </div>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-icon">🍜</div>
+                    <div>
+                        <p>Food</p>
+                        <h2 id="foodCount">0</h2>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- RECENT PLACES -->
+            <div class="content-card">
+                <div class="card-heading">
+                    <div>
+                        <h2>Recently Added Places</h2>
+                        <p>Your latest tourist destination entries.</p>
+                    </div>
+
+                    <button class="text-btn" id="viewAllBtn">
+                        View All
+                    </button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Place</th>
+                                <th>Category</th>
+                                <th>Location</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentPlacesTable"></tbody>
+                    </table>
+                </div>
+
+                <p class="empty-message" id="recentEmpty">
+                    No places added yet.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- MANAGE PLACES SECTION -->
+        <section id="places" class="page-section" hidden>
+
+            <div class="welcome-section">
+                <div>
+                    <h2>Manage Tourist Places</h2>
+                    <p>Add, edit, update, upload, and delete place details.</p>
+                </div>
+
+                <button class="primary-btn" id="addPlaceBtn2">
+                    + Add New Place
+                </button>
+            </div>
+
+            <!-- SEARCH AND FILTER -->
+            <div class="content-card">
+
+                <div class="toolbar">
+                    <input
+                        type="search"
+                        id="searchPlaces"
+                        placeholder="Search place name or location..."
+                    >
+
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="historical">Historical</option>
+                        <option value="museum">Museum</option>
+                        <option value="church">Church</option>
+                        <option value="park">Park</option>
+                        <option value="food">Food</option>
+                    </select>
+                </div>
+
+                <!-- PLACES TABLE -->
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Place Details</th>
+                                <th>Category</th>
+                                <th>Location</th>
+                                <th>Directions</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="placesTable"></tbody>
+                    </table>
+                </div>
+
+                <p class="empty-message" id="placesEmpty">
+                    No tourist places found.
+                </p>
+
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="dashboard-footer">
+            Lakbay Manila Admin Panel © <span id="currentYear"></span>
+        </footer>
+
+    </main>
+
+    <!-- ADD / EDIT PLACE MODAL -->
+    <div class="modal-overlay" id="placeModal" hidden>
+
+        <div class="modal">
+
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle">Add New Place</h2>
+                    <p>Enter the tourist destination information.</p>
+                </div>
+
+                <button class="close-btn" id="closeModalBtn" type="button">
+                    ×
+                </button>
+            </div>
+
+            <form id="placeForm">
+
+                <input type="hidden" id="placeId">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="placeName">Place Name *</label>
+                        <input
+                            type="text"
+                            id="placeName"
+                            placeholder="Enter place name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="placeCategory">Category *</label>
+                        <select id="placeCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="historical">Historical</option>
+                            <option value="museum">Museum</option>
+                            <option value="church">Church</option>
+                            <option value="park">Park</option>
+                            <option value="food">Food</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="placeLocation">Location *</label>
+                        <input
+                            type="text"
+                            id="placeLocation"
+                            placeholder="Example: Intramuros"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="placeMap">Google Maps Search *</label>
+                        <input
+                            type="text"
+                            id="placeMap"
+                            placeholder="Example: Fort Santiago Manila"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="placeDetails">Place Description *</label>
+                        <textarea
+                            id="placeDetails"
+                            rows="5"
+                            placeholder="Enter place description..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="placeImage">Upload Place Picture</label>
+                        <input
+                            type="file"
+                            id="placeImage"
+                            accept="image/*"
+                        >
+
+                        <small class="input-note">
+                            Select an image from your computer.
+                        </small>
+
+                        <img
+                            src=""
+                            alt="Image preview"
+                            id="imagePreview"
+                            class="image-preview"
+                            hidden
+                        >
+                    </div>
+
+                </div>
+
+                <div class="modal-actions">
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        id="cancelBtn"
+                    >
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="primary-btn">
+                        Save Place
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- NOTIFICATION -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>
